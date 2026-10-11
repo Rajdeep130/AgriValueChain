@@ -37,3 +37,29 @@ Each entry records what was decided, why, and what we gave up.
 - **Date:** 2026-10-11 · **Status:** Implemented (not yet enabled)
 - Pages' simple branch mode only publishes the repository root or `/docs`, and `/docs` holds documentation.
   The workflow runs the tests first, then publishes `frontend/`.
+
+## D-006 — Start the data model fresh
+- **Date:** 2026-10-11 · **Status:** Approved by owner
+- The earlier documentation (BR-001…BR-169) was not available. Business rules restart at BR-001 in
+  `BUSINESS_RULES.md`. Old numbers do not carry over.
+
+## D-007 — India, ₹ INR, kilograms, all crop categories
+- **Date:** 2026-10-11 · **Status:** Approved by owner
+- All stock is stored in kg (g, quintal and tonne are display units). Money is ₹ INR with 2 decimals.
+  Every crop category is supported, including perishables and dairy, so expiry and FEFO are needed from the start.
+- Trade-off: count-based items (eggs) are not supported in V1. Liquids are stocked in kg, with a display factor.
+
+## D-008 — Core data relationships
+- **Date:** 2026-10-11 · **Status:** Proposed, awaiting owner review
+- Recorded as R1–R14 in `DATABASE.md` §3. Key points: crop ≠ product (each crop has one RAW product);
+  PO, receipt and inspection are separate records; a batch holds no quantity; **the inventory ledger is
+  the only source of stock quantities**; reservations are separate from on-hand stock.
+
+## D-009 — Roles and permissions live in code, not in the spreadsheet
+- **Date:** 2026-10-11 · **Status:** Proposed
+- This prevents anyone who can edit a sheet from granting themselves permissions. `tblUsers` only assigns a role.
+
+## D-010 — Duplicate protection moves to a shared request log
+- **Date:** 2026-10-11 · **Status:** Proposed
+- `tblRequestLog` replaces the per-table `request_id` column from the proof of concept, so every write
+  action gets the same protection without extra columns on each table.
