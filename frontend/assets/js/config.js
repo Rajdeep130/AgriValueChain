@@ -9,5 +9,6 @@ window.AGRI_CONFIG = {
   API_URL: 'https://script.google.com/macros/s/AKfycby6CUyJuh3ZLh25g6ImEORFxjMj82Hs3glF2E8WdpZxCsIUQ6zV_OSPVrzia6774O8Q9g/exec',
   // Paste your Google OAuth Client ID (ends with .apps.googleusercontent.com) here.
   GOOGLE_CLIENT_ID: '254675125889-vphe78sl83pgaro890gs27hkg9ut9mr4.apps.googleusercontent.com',
-  REQUEST_TIMEOUT_MS: 20000
+  // Apps Script can take 10-30 s on the first request after a quiet period.
+  REQUEST_TIMEOUT_MS: 45000
 };

@@ -25,7 +25,7 @@
     const opts = options || {};
     const cfg = root.AGRI_CONFIG || {};
     const fetchFn = opts.fetchFn || root.fetch;
-    const timeoutMs = opts.timeoutMs || cfg.REQUEST_TIMEOUT_MS || 20000;
+    const timeoutMs = opts.timeoutMs || cfg.REQUEST_TIMEOUT_MS || 45000;
     const body = { action: action, payload: payload || {} };
     if (opts.idToken) body.id_token = opts.idToken;
     if (opts.requestId) body.request_id = opts.requestId;
@@ -43,7 +43,11 @@
       });
     } catch (err) {
       if (err && err.name === 'AbortError') {
-        return failure('TIMEOUT', 'The server took too long to respond. Check your connection and try again.');
+        // A slow write may still finish on the server. Retrying is safe because
+        // the same request_id is reused and the backend saves it only once.
+        return failure('TIMEOUT', opts.requestId
+          ? 'The server took too long to respond. Your change may already be saved. Submit again; it will not be saved twice.'
+          : 'The server took too long to respond. Check your connection and try again.');
       }
       return failure('NETWORK_ERROR', 'Could not reach the server. Check your connection and try again.');
     } finally {

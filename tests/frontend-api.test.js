@@ -34,6 +34,18 @@ test('slow server → TIMEOUT', async () => {
     })
   });
   assert.equal(r.error.code, 'TIMEOUT');
+  assert.match(r.error.message, /connection/);
+});
+
+test('slow write → TIMEOUT telling the user a retry is safe', async () => {
+  const r = await call('createNote', { text: 'a' }, {
+    requestId: 'req-slow-0001',
+    fetchFn: (url, init) => new Promise((resolve, reject) => {
+      init.signal.addEventListener('abort', () => { const e = new Error('aborted'); e.name = 'AbortError'; reject(e); });
+    })
+  });
+  assert.equal(r.error.code, 'TIMEOUT');
+  assert.match(r.error.message, /may already be saved/);
 });
 
 test('HTTP error status → HTTP_ERROR', async () => {

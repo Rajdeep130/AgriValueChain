@@ -38,11 +38,27 @@ accepts only routes it explicitly defines.
 page loads with no JavaScript errors, Ping without a backend shows `NETWORK_ERROR`, empty note shows
 `VALIDATION_ERROR`, no horizontal scrolling.
 
+### 2026-10-11 — Step 1: live tests on real Google services (owner, in browser)
+
+Frontend: https://rajdeep130.github.io/AgriValueChain/ · Backend: Apps Script web app "POC v1"
+
+| # | Test | Result |
+|---|---|---|
+| 1 | Ping from GitHub Pages to Apps Script (cross-origin POST, text/plain, redirect) | ✅ `pong` with server time |
+| 2 | Protected call without sign-in | ✅ `UNAUTHENTICATED` |
+| 3 | Google sign-in → backend verifies token → role from `tblUsers` | ✅ `ADMIN`, `U000001` |
+| 4 | Write note | ✅ `NOTE000001` written to `tblPocNotes`. The **first attempt timed out in the browser after 20 s but had saved on the server** |
+| 4b | Re-submit after timeout (same `request_id`) | ✅ still exactly **one** row (duplicate protection works) |
+
+**Problem found:** a 20-second browser timeout is too short for a first write after a quiet period.
+**Fix:** timeout raised to 45 s, and a timed-out write now tells the user a retry is safe (test added: 35/35 pass).
+
+**Setup issue found:** the Client *secret* was first entered as `GOOGLE_CLIENT_ID`, so every sign-in was
+rejected (`UNAUTHENTICATED`). Fixed by entering the Client ID. DEPLOYMENT.md Part C warns about this.
+
 ### NOT yet verified (needs the owner's Google account)
 
-- Real Apps Script deployment, real Google Sheet writes and real `LockService`
-- Real Google ID-token verification via `oauth2.googleapis.com/tokeninfo`
-- Real CORS and redirect behaviour between GitHub Pages and the `/exec` URL
+- Read notes, audit-log row, validation, network-failure and FORBIDDEN (non-ADMIN) checks on live services
 - GitHub Pages publishing workflow
 - Behaviour with two people saving at the same moment
 
