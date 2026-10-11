@@ -49,6 +49,7 @@ Frontend: https://rajdeep130.github.io/AgriValueChain/ · Backend: Apps Script w
 | 3 | Google sign-in → backend verifies token → role from `tblUsers` | ✅ `ADMIN`, `U000001` |
 | 4 | Write note | ✅ `NOTE000001` written to `tblPocNotes`. The **first attempt timed out in the browser after 20 s but had saved on the server** |
 | 4b | Re-submit after timeout (same `request_id`) | ✅ still exactly **one** row (duplicate protection works) |
+| 4c | Audit log | ✅ exactly one `CREATE · tblPocNotes · NOTE000001 · SUCCESS` row, same `request_id` |
 
 **Problem found:** a 20-second browser timeout is too short for a first write after a quiet period.
 **Fix:** timeout raised to 45 s, and a timed-out write now tells the user a retry is safe (test added: 35/35 pass).
