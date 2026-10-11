@@ -1,0 +1,31 @@
+# Dependencies and tool output
+node_modules/
+coverage/
+*.log
+
+# Apps Script sync tool settings (contain your personal script ID)
+.clasp.json
+.clasprc.json
+
+# Local secrets and environment files — NEVER commit these
+.env
+.env.*
+secrets/
+*.pem
+*.key
+credentials*.json
+client_secret*.json
+token*.json
+
+# Operational data, exports and backups — keep out of Git
+data/private/
+backups/
+exports/
+*.xlsx
+!data/samples/*.xlsx
+
+# OS / editor clutter
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

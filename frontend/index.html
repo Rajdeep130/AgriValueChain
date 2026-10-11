@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AgriChain 360 — Connection Test</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>AgriChain 360</h1>
+    <span class="badge">Proof of concept</span>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>1. Sign in</h2>
+      <p>Sign in with the Google account registered as a user.</p>
+      <div id="signin-button"></div>
+      <p id="signin-status" class="muted">Not signed in.</p>
+      <button type="button" id="btn-signout" hidden>Sign out</button>
+    </section>
+
+    <section class="card">
+      <h2>2. Connection tests</h2>
+      <div class="button-row">
+        <button type="button" data-test="ping">Ping (no sign-in)</button>
+        <button type="button" data-test="whoami">Who am I?</button>
+        <button type="button" data-test="listNotes">Read notes</button>
+        <button type="button" data-test="noToken">Call without sign-in (should fail)</button>
+        <button type="button" data-test="badUrl">Unreachable server (should fail)</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>3. Write test (ADMIN only)</h2>
+      <form id="note-form" novalidate>
+        <label for="note-text">Note text <span class="required" aria-hidden="true">*</span></label>
+        <input id="note-text" name="text" type="text" maxlength="200" required aria-describedby="note-help">
+        <small id="note-help" class="muted">Required, at most 200 characters.</small>
+        <button type="submit" id="btn-save">Save note</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Result</h2>
+      <div id="result-banner" role="status" aria-live="polite" class="banner">No request yet.</div>
+      <pre id="result-detail" class="detail"></pre>
+    </section>
+  </main>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="https://accounts.google.com/gsi/client" async onload="AgriApp.initGoogleSignIn()"></script>
+</body>
+</html>

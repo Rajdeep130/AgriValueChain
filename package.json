@@ -1,0 +1,11 @@
+{
+  "name": "agrivaluechain-360",
+  "private": true,
+  "description": "AgriChain 360 — agricultural value chain management system",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

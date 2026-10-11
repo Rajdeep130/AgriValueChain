@@ -1,6 +1,6 @@
 # AgriChain 360 — Architecture Feasibility Report
 
-Status: **DRAFT — awaiting owner decision.** Nothing in this report has been implemented or tested yet.
+Status: **Option A approved by owner on 2026-10-11** (see `DECISIONS.md`). Integration not yet verified on real Google services.
 Date: 2026-10-11
 
 ---
