@@ -57,7 +57,8 @@ You will **not** need a client *secret*. If Google offers one, do not download i
 ## Part D — Tell the backend your Client ID
 
 1. Apps Script editor → ⚙️ **Project Settings** → **Script Properties** → **Add script property**.
-2. Property: `GOOGLE_CLIENT_ID`. Value: the Client ID from Part C. Click **Save**.
+2. Property: `GOOGLE_CLIENT_ID`. Value: the **Client ID** from Part C (ends with `.apps.googleusercontent.com`;
+   **not** the Client secret that starts with `GOCSPX-`). Click **Save**.
    (`SPREADSHEET_ID` is already there. Part B created it.)
 
 ## Part E — Publish the backend as a web app
