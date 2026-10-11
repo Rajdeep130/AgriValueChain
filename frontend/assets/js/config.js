@@ -8,6 +8,6 @@ window.AGRI_CONFIG = {
   // Paste your Apps Script web app URL (ends with /exec) here.
   API_URL: 'PASTE_WEB_APP_URL_HERE',
   // Paste your Google OAuth Client ID (ends with .apps.googleusercontent.com) here.
-  GOOGLE_CLIENT_ID: 'PASTE_CLIENT_ID_HERE',
+  GOOGLE_CLIENT_ID: '254675125889-vphe78sl83pgaro890gs27hkg9ut9mr4.apps.googleusercontent.com',
   REQUEST_TIMEOUT_MS: 20000
 };
